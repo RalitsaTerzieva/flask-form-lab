@@ -23,3 +23,6 @@ def index():
         form.breed.data = ''
 
     return render_template('home.html', form=form, breed=breed)
+
+if __name__ == '__main__':
+    app.run(debug=True)
