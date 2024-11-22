@@ -46,3 +46,5 @@ htmlcov/
 
 # Jupyter Notebook
 .ipynb_checkpoints/
+
+data.sqlite
