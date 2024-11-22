@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect, url_for
+from flask import Flask, render_template, session, redirect, url_for, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField, DateField, RadioField, SelectField, TextAreaField
 from wtforms.validators import DataRequired
@@ -24,6 +24,8 @@ def index():
     form = InfoForm()
 
     if form.validate_on_submit():
+        flash("You just clicked the button!")
+        
         session['breed'] = form.breed.data
         session['neutered'] = form.neutered.data
         session['mood'] = form.mood.data
