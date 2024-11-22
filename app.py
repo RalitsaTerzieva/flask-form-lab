@@ -1,12 +1,17 @@
+import os
 from flask import Flask, render_template, session, redirect, url_for, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField, DateField, RadioField, SelectField, TextAreaField
 from wtforms.validators import DataRequired
+from flask_sqlalchemy import SQLAlchemy
 
 
+basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'mysecretkey'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 class InfoForm(FlaskForm):
 
@@ -25,7 +30,7 @@ def index():
 
     if form.validate_on_submit():
         flash("You just clicked the button!")
-        
+
         session['breed'] = form.breed.data
         session['neutered'] = form.neutered.data
         session['mood'] = form.mood.data
