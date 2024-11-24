@@ -25,6 +25,7 @@ with app.app_context():
     db.session.commit()
 
     print(puppy_one)
+    print(puppy_one.report_toys())
 
     # Query a puppy by name
     puppy_frankie = Puppy.query.filter_by(name='Frankie').all()
