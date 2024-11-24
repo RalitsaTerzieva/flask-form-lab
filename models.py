@@ -53,8 +53,26 @@ class Puppy(db.Model):
             print(toy.item_name)
 
 class Toy(db.Model):
-    pass
+    
+    __tablename__ = 'toys'
+
+    id = db.Column(db.Integer, primary_key=True)
+    item_name = db.Column(db.Text)
+    puppy_id = db.Column(db.Integer, db.ForeignKey('puppies.id'))
+
+    def __init__(self, item_name, puppy_id):
+        self.item_name = item_name
+        self.puppy_id = puppy_id
 
 
 class Owner(db.Model):
-    pass
+
+    __tablename__ = 'owners'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text)
+    puppy_id = db.Column(db.Integer, db.ForeignKey('puppies.id'))
+
+    def __init__(self, name, puppy_id):
+        self.name = name
+        self.puppy_id = puppy_id
