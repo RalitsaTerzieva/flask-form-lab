@@ -36,10 +36,9 @@ class Puppy(db.Model):
     toys = db.relationship('Toy', backref='puppy', lazy='dynamic')
     owner = db.relationship('Owner', backref='puppy', uselist=False)
 
-    def __init__(self, name, age, breed):
+    def __init__(self, name, age):
         self.name = name
         self.age = age
-        self.breed = breed
         
     def __repr__(self):
         if self.owner:

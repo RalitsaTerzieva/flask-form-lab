@@ -1,16 +1,29 @@
-from app import db, Puppy, app
+from models import db, Puppy, app, Owner, Toy
 
 with app.app_context():
-    my_puppy = Puppy('Rufus', 5)
-    db.session.add(my_puppy)
+    rufus = Puppy('Rufus', 5)
+    fido = Puppy('Fido', 2)
+    db.session.add_all([rufus, fido])
     db.session.commit()
 
     # Retrieve all puppies
     all_puppies = Puppy.query.all()
     print(all_puppies)
 
+    
+
     # Retrieve a puppy by primary key (id)
     puppy_one = db.session.get(Puppy, 1)
+    print(puppy_one)
+
+    owner = Owner('Jose', puppy_id=puppy_one.id)
+
+    toy1 = Toy('Ball', puppy_id=puppy_one.id)
+    toy2 = Toy('Bear', puppy_id=puppy_one.id)
+
+    db.session.add_all([owner, toy1, toy2])
+    db.session.commit()
+
     print(puppy_one)
 
     # Query a puppy by name
