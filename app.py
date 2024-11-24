@@ -1,24 +1,5 @@
-import os
-from flask import Flask, render_template, session, redirect, url_for, flash
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, BooleanField, RadioField, SelectField, TextAreaField
-from wtforms.validators import DataRequired
-from models import app, Puppy
-
-
-app.config['SECRET_KEY'] = 'mysecretkey'
-
-
-
-
-class InfoForm(FlaskForm):
-
-    breed = StringField("What breed are you?", validators=[DataRequired()])
-    neutered = BooleanField("have you been neutered?")
-    mood = RadioField("Please choose your mood:", choices=[("mood_one", "Happy"), ("mood_two", "Excited")])
-    food_choice = SelectField("Pick your favourite food:", choices=[('chi', 'Chicken'), ('bf', 'Beef'), ('fish', 'Fish')])
-    feedback = TextAreaField()
-    submit = SubmitField("Submit")
+from flask import render_template, session, redirect, url_for, flash
+from models import app, InfoForm
 
 
 @app.route('/', methods=["GET", "POST"])
